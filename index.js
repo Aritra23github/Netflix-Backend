@@ -1,7 +1,8 @@
 const express = require('express');
 const { Sequelize } = require('sequelize');
-
+const user = require('./routes/user');
 const db = require('./config/database');
+const cors = require('cors');
 
 require('dotenv').config(); 
 
@@ -9,9 +10,15 @@ const app = express();
 
 const port = process.env.PORT;
 
+app.use((express.json({ limit: "30mb", extended: true})));
+app.use((express.urlencoded({ limit: "30mb", extended: true})));
+app.use((cors()));
+
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
+
+app.use(user);
 
 const initApp = async () => {
     console.log("Testing the database connection..");
