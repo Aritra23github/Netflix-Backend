@@ -10,7 +10,7 @@ const User = db.User;
 exports.signup = async (req, res) => {
     try {
        const { firstName, lastName, email, password } = req.body;
-
+        console.log(password);
        const isUserExists = await db.User.findOne({
         where: {
             email: email
@@ -20,11 +20,13 @@ exports.signup = async (req, res) => {
         if (isUserExists) {
             return res.status(200).send({message: "User alreday exists", data: User});
         } else {
+            let hashedPassword = await bcrypt.hash(password, 10);
+            
             const User = await db.User.create({
                 firstName: firstName,
-                lastName: lastName,
+                lastName: lastName || '',
                 email: email,
-                password: bcrypt.hashSync(password, 10)
+                password: hashedPassword
             });
     
            return res.status(200).send({message: "User created successfully", data: User});
