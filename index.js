@@ -1,6 +1,6 @@
 const express = require('express');
 const { Sequelize } = require('sequelize');
-const user = require('./routes/user');
+const routes = require('./routes');
 const db = require('./config/database');
 const cors = require('cors');
 
@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-app.use(user);
+app.use(routes);
 
 const initApp = async () => {
     console.log("Testing the database connection..");
