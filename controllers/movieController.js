@@ -46,3 +46,42 @@ exports.movieTrailer = async (req, res) => {
         console.log(error);
     }
 }
+
+exports.popularMovie = async (req, res) => {
+    try {
+        const url = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1';
+
+        const movieList = await fetch(url, options);
+        const popularMovie = await movieList.json();
+
+        return res.status(200).send({message: "Popular movie fetched successfully", data: popularMovie?.results});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.topRatedMovie = async (ree, res) => {
+    try {
+       const url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
+       
+       const movieList = await fetch(url, options);
+       const topRatedMovie = await movieList.json();
+
+       return res.status(200).send({message: "Top rated movie fetched successfully", data: topRatedMovie?.results});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.upcomingMovie = async (req, res) => {
+    try {
+        const url = 'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1';
+
+        const movieList = await fetch(url, options);
+        const upcomingMovie = await movieList.json();
+
+        return res.status(200).send({message: "Upcoming movie fetched successfully", data: upcomingMovie?.results});
+    } catch (error) {
+        console.log(error);
+    }
+}
