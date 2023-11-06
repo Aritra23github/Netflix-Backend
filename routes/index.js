@@ -12,7 +12,8 @@ const {
     movieTrailer, 
     popularMovie, 
     topRatedMovie,
-    upcomingMovie
+    upcomingMovie,
+    suggestedMovie
 } = require('../controllers/movieController');
 
 const { movieSuggestion } = require('../controllers/openAiController');
@@ -26,6 +27,7 @@ router.get('/popular-movie', popularMovie);
 router.get('/top-rated-movie', topRatedMovie);
 router.get('/upcoming-movie', upcomingMovie);
 
-router.get('/movie-suggestion', movieSuggestion);
+router.post('/movie-suggestion', movieSuggestion);
+router.post('/list-of-movies', suggestedMovie);
 
 module.exports = router;

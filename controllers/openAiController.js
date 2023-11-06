@@ -9,13 +9,13 @@ const openai = new OpenAI({
 
 exports.movieSuggestion = async (req, res) => {
     try {
+        const { search } = req.body;
+
         const chatCompletion = await openai.chat.completions.create({
-            messages: [{ role: "user", content: "Say this is a test" }],
+            messages: [{ role: "user", content: search }],
             model: "gpt-3.5-turbo",
         });
-
-        console.log(chatCompletion);
-         
+        //  console.log(chatCompletion);
         return res.status(200).send({message: "Chat completion fetched successfully", data: chatCompletion.choices});
     } catch (error) {
         console.log(error);

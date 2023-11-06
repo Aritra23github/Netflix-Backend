@@ -85,3 +85,18 @@ exports.upcomingMovie = async (req, res) => {
         console.log(error);
     }
 }
+
+exports.suggestedMovie = async (req, res) => {
+    try {
+        const { movie } = req.body;
+        // console.log('movie:', movie);
+        const url = `https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US`;
+
+        const movieList = await fetch(url, options);
+        const suggestedMovieList = await movieList.json();
+
+        return res.status(200).send({message: "Movie fetched successfully", data: suggestedMovieList?.results});
+    } catch (error) {
+        console.log(error);
+    }
+}
